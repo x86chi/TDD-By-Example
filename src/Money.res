@@ -1,4 +1,4 @@
-type currency = Dollar | Franc
+type currency = USD | CHF
 type money = {currency: currency, amount: int}
 
 let generate = (currency, amount) => {currency: currency, amount: amount}
