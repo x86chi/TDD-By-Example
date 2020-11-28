@@ -15,3 +15,10 @@ let equal = (alice, bob) =>
     alice === bob
   | _ => raise(Different("Not ready to compare different currency"))
   }
+
+let plus = (alice, bob) =>
+  switch (alice, bob) {
+  | (USD(alice), USD(bob)) => USD(alice +. bob)
+  | (CHF(alice), CHF(bob)) => CHF(alice +. bob)
+  | _ => raise(Different("Not ready to compare different currency"))
+  }

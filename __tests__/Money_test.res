@@ -20,3 +20,12 @@ describe("equal", () => {
     expect(Money.equal(alice, bob)) |> toBe(false)
   })
 })
+
+describe("plus", () => {
+  let alice = Money.USD(5.0)
+  let bob = alice
+  test("same currency", () => {
+    let output = Money.plus(alice, bob)
+    expect(Money.equal(output, Money.USD(10.0))) |> toBe(true)
+  })
+})
