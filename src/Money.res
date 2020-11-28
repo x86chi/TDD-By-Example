@@ -1,18 +1,17 @@
-type currency = USD | CHF
-type money = {currency: currency, amount: int}
+type currency = USD(float) | CHF(float)
 
-let generate = (currency, amount) => {currency: currency, amount: amount}
-
-let multiply = (money, times) => {
-  let multiplied = money.amount * times
-  {...money, amount: multiplied}
-}
+let multiply = (currency, times) =>
+  switch currency {
+  | USD(amount) => USD(amount *. times)
+  | CHF(amount) => CHF(amount *. times)
+  }
 
 exception Different(string)
 
-let equal = (alice, bob) => {
-  if alice.currency !== bob.currency {
-    raise(Different("Not ready to compare different currency"))
+let equal = (alice, bob) =>
+  switch (alice, bob) {
+  | (USD(alice), USD(bob))
+  | (CHF(alice), CHF(bob)) =>
+    alice === bob
+  | _ => raise(Different("Not ready to compare different currency"))
   }
-  alice.amount === bob.amount
-}
