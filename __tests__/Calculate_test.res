@@ -43,7 +43,7 @@ describe("plus", () => {
     })
     test("CHF + USD", () => {
       let output = Calculate.plus(bob, alice)
-      expect(Calculate.equal(output, Money.CHF(20.0))) |> toBe(true)
+      expect(Calculate.equal(output, Money.USD(10.0))) |> toBe(true)
     })
   })
 })
