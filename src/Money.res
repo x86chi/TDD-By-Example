@@ -1,1 +1,2 @@
-type currency = USD(float) | CHF(float)
+type currency = USD | CHF
+type money = (currency, float)

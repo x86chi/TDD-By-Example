@@ -1,24 +1,27 @@
 open Money
 
-let multiply = (currency, times) =>
-  switch currency {
-  | USD(amount) => USD(amount *. times)
-  | CHF(amount) => CHF(amount *. times)
-  }
+let multiply = ((money, amount), times): money => (money, amount *. times)
 
-let reduce = money => Bank.reduce(money, Bank.USD)
+let reduce = money => Bank.reduce(money, USD)
 
-let equal = (alice, bob) =>
-  switch (alice, bob) {
-  | (USD(a), USD(b))
-  | (CHF(a), CHF(b)) =>
-    a === b
-  | _ => reduce(alice) === reduce(bob)
-  }
+let equal = (alice, bob) => {
+  let (c1, a1) = alice
+  let (c2, a2) = bob
 
-let plus = (alice, bob) =>
-  switch (alice, bob) {
-  | (USD(a), USD(b)) => USD(a +. b)
-  | (CHF(a), CHF(b)) => CHF(a +. b)
-  | _ => USD(reduce(alice) +. reduce(bob))
+  if c1 === c2 {
+    a1 === a2
+  } else {
+    reduce(alice) === reduce(bob)
   }
+}
+
+let plus = (alice, bob) => {
+  let (c1, a1) = alice
+  let (c2, a2) = bob
+
+  if c1 === c2 {
+    (c1, a1 +. a2)
+  } else {
+    (USD, reduce(alice) +. reduce(bob))
+  }
+}
